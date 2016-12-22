@@ -27,21 +27,23 @@ public class AdminMenuTest extends TestAncestor {
 	public void VerifyMenuList() {
 		login();
 		int countMenuItems = driver.findElements(By.id("app-")).size();
-		for (int i=0; i< countMenuItems; i++){
-			WebElement  menuItem = driver.findElements(By.id("app-")).get(i);
-			System.out.println("menuItem: "+ menuItem.getText());
-			menuItem.click();			
-			assertEquals(1, driver.findElements(By.tagName("h1")).size());
+		for (int i=1; i<= countMenuItems; i++){
+			verifyMenuItem(By.cssSelector("[id=app-]:nth-of-type("+i+")"));
+			
 			List<WebElement> subMenuItems = driver.findElements(By.cssSelector("[id^=doc-]"));
 			if(subMenuItems.size()>0){
 				List<String> subMenuIds = getListofIds(subMenuItems);
 				for(String id:subMenuIds ){
-					driver.findElement(By.id(id)).click();
-					assertEquals(1, driver.findElements(By.tagName("h1")).size());
+					verifyMenuItem(By.id(id));
 				}
 				
 			}
 		}
+	}
+	
+	private void verifyMenuItem(By locator){
+		driver.findElement(locator).click();
+		assertEquals(1, driver.findElements(By.tagName("h1")).size());
 	}
 	
 	private List<String> getListofIds(List<WebElement> elems){
