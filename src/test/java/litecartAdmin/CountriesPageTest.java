@@ -11,10 +11,12 @@ import org.openqa.selenium.WebElement;
 import testHelper.TestAncestor;
 import testHelper.WebElemsHelper;
 import Pages.AdminLoginPage;
+import org.junit.Ignore;
 
 public class CountriesPageTest extends TestAncestor {
 
-	@Test
+	@Ignore
+        @Test
 	public void ListCountries_ShouldBeSortedAsc() {
 		(new AdminLoginPage(driver)).login();
 		driver.get("http://litecart.resscode.org.ua/admin/?app=countries&doc=countries");
@@ -26,7 +28,8 @@ public class CountriesPageTest extends TestAncestor {
 	    }
 	}
         
-	@Test
+	@Ignore
+        @Test
 	public void GeoZones_ShouldBeSortedAsc() {
             (new AdminLoginPage(driver)).login();
             driver.get("http://litecart.resscode.org.ua/admin/?app=countries&doc=countries");
