@@ -1,19 +1,17 @@
 package testHelper;
 
-import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import static testHelper.WebDriverHelper.getDriver;
 
 public abstract class TestAncestor {
 	protected WebDriver driver;
 		
 	@Before
 	public void start(){
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver = getDriver();
 	}
 	@After
 	public void finish(){
