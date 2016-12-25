@@ -24,9 +24,9 @@ public class AdminMenuTest extends TestAncestor {
 			List<WebElement> subMenuItems = driver.findElements(By.cssSelector("[id^=doc-]"));
 			if(subMenuItems.size()>0){
 				List<String> subMenuIds = WebElemsHelper.getListOfIds(subMenuItems);
-				for(String id:subMenuIds ){
-					verifyMenuItemHeader(By.id(id));
-				}
+                                subMenuIds.forEach((id) ->
+                                    verifyMenuItemHeader(By.id(id))
+                            );
 				
 			}
 		}

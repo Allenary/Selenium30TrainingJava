@@ -1,2 +1,5 @@
 *.class
 .settings
+/target/
+/nbproject/
+.idea

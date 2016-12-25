@@ -14,26 +14,35 @@ import Pages.AdminLoginPage;
 
 public class CountriesPageTest extends TestAncestor {
 
-	/*
-	 * проверить, что страны расположены в алфавитном порядке
-	 */
 	@Test
-	public void test() {
+	public void ListCountries_ShouldBeSortedAsc() {
 		(new AdminLoginPage(driver)).login();
 		driver.get("http://litecart.resscode.org.ua/admin/?app=countries&doc=countries");
 		int columnId = getColumnIdByName("Name");
 		List<WebElement> elems = driver.findElements(By.cssSelector(".row td:nth-child("+columnId+")"));
 		List<String> countryNames = WebElemsHelper.getElemsTexts(elems);
 		for (int i = 1; i < countryNames.size(); i++) {
-	        assertTrue(countryNames.get(i-1).compareTo(countryNames.get(i)) > 0);
+	        assertTrue(countryNames.get(i).compareTo(countryNames.get(i-1)) > 0);
 	    }
-		
 	}
-		
+        
+	@Test
+	public void GeoZones_ShouldBeSortedAsc() {
+            (new AdminLoginPage(driver)).login();
+            driver.get("http://litecart.resscode.org.ua/admin/?app=countries&doc=countries");
+            int columnId = getColumnIdByName("Zones");
+            int nameColumnId = getColumnIdByName("Name");
+            List<WebElement> rows = driver.findElements(By.className("row"));
+            for(WebElement row: rows){
+                if(!row.findElement(By.cssSelector("td:nth-child("+columnId+")")).getText().equalsIgnoreCase("0")){
+                    System.out.println(row.findElement(By.cssSelector("td:nth-child("+nameColumnId+")")).getAttribute("href"));
+                }
+            }
+            
+        }	
 	private int getColumnIdByName(String columnName){
 		List<WebElement> headerCells = driver.findElements(By.tagName("th"));
 		for (int i=0; i< headerCells.size(); i++){
-			//System.out.println(headerCells.get(i).getText());
 			if(headerCells.get(i).getText().matches(columnName)) return i+1;
 		}
 		return -1;
