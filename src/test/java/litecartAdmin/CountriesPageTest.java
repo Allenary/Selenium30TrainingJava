@@ -24,7 +24,7 @@ public class CountriesPageTest extends TestAncestor {
         int columnId = columnHeaders.indexOf("Name") + 1;
 		List<WebElement> elems = driver.findElements(By.cssSelector(".row td:nth-child("+columnId+")"));
 		List<String> countryNames = WebElemsHelper.getElemsTexts(elems);
-	        assertTrue(isSortedAsc(countryNames));
+	    assertTrue(isSortedAsc(countryNames));
 	}
         
 }
