@@ -11,10 +11,9 @@ import org.openqa.selenium.WebElement;
 import testHelper.TestAncestor;
 import testHelper.WebElemsHelper;
 import Pages.AdminLoginPage;
-import org.junit.Ignore;
 
 public class AdminMenuTest extends TestAncestor {
-	@Ignore
+
 	@Test
 	public void VerifyMenuList() {
 		(new AdminLoginPage(driver)).login();

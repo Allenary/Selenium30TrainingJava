@@ -15,7 +15,9 @@ public class ArrayHelper {
     
     public static boolean isSortedAsc(List<String> list){
         for (int i = 1; i < list.size(); i++) {
-            if(list.get(i).compareTo(list.get(i-1)) < 0) return false;
+            if(list.get(i).compareTo(list.get(i-1)) < 0){
+            	return false;
+            }
         }
         return true;
     }

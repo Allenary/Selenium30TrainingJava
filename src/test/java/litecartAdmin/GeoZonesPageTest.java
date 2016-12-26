@@ -5,13 +5,14 @@
  */
 package litecartAdmin;
 
-import Pages.AdminLoginPage;
+import static testHelper.ArrayHelper.isSortedAsc;
+import static testHelper.WebDriverHelper.getDriver;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.junit.Assert;
-import static org.junit.Assert.assertTrue;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -20,10 +21,10 @@ import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import static testHelper.ArrayHelper.isSortedAsc;
+
 import testHelper.TestAncestor;
-import static testHelper.WebDriverHelper.getDriver;
 import testHelper.WebElemsHelper;
+import Pages.AdminLoginPage;
 
 /**
  *
@@ -40,7 +41,7 @@ public class GeoZonesPageTest extends TestAncestor {
          (new AdminLoginPage(driver)).login();
             driver.get("http://litecart.resscode.org.ua/admin/?app=geo_zones&doc=geo_zones");
             List<WebElement> elems = driver.findElements(By.cssSelector(".row td:nth-child(3) a"));
-            List<Object[]> hrefs = new ArrayList();
+            List<Object[]> hrefs = new ArrayList<Object[]>();
             elems.forEach((e) -> {
                 hrefs.add(new Object[] {e.getAttribute("href")});
             });

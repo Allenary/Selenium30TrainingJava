@@ -18,7 +18,6 @@ public class WebElemsHelper {
 			List<String> elemsIds = new ArrayList<String>();
 			for(WebElement el: elems){
 				elemsIds.add(el.getAttribute("id"));
-//				System.out.println("subMenuItemId: "+ el.getAttribute("id"));
 			}
 			return elemsIds;
 		}
