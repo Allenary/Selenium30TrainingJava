@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
+import testHelper.ColorHelper;
+import static testHelper.ColorHelper.getColorName;
 
 import testHelper.TestAncestor;
 
@@ -15,7 +18,6 @@ public class CampaignItemTest extends TestAncestor{
 	public void test() {
 		driver.get("http://litecart.resscode.org.ua/en/");
 		WebElement product = driver.findElement(By.cssSelector("#box-campaigns li:first-child"));
-		
 		
 		WebElement oldPriceElement_mainPage = product.findElement(By.className("regular-price"));
 		verifyOldPriceStyles(oldPriceElement_mainPage);
@@ -47,12 +49,16 @@ public class CampaignItemTest extends TestAncestor{
 	}
 	
 	private void verifyOldPriceStyles(WebElement price){
-		assertEquals("s", price.getTagName());
-		assertEquals("rgba(119, 119, 119, 1)", price.getCssValue("color"));
+                Color color = Color.fromString(price.getCssValue("color"));
+                assertTrue(ColorHelper.isGrey(getColorName(color.asHex())));
+                
+                assertEquals("s", price.getTagName());
 	}
 	private void verifyNewPriceStyles(WebElement price){
+                Color color = Color.fromString(price.getCssValue("color"));
+                assertEquals("RED", getColorName(color.asHex()));
+                
 		assertEquals("strong", price.getTagName());
-		assertEquals("rgba(204, 0, 0, 1)", price.getCssValue("color"));
 	}
 	private void isNewPriceBigger(WebElement oldPrice, WebElement newPrice){
 		assertTrue(oldPrice.getSize().height < newPrice.getSize().height);
