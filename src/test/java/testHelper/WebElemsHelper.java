@@ -14,7 +14,7 @@ public class WebElemsHelper {
 		return elemsTexts;
 	 }
 	 
-	 public static  List<String> getListOfIds(List<WebElement> elems){
+	 public static List<String> getListOfIds(List<WebElement> elems){
 			List<String> elemsIds = new ArrayList<String>();
 			for(WebElement el: elems){
 				elemsIds.add(el.getAttribute("id"));

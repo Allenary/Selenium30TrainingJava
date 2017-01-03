@@ -1,7 +1,5 @@
 package litecartShop;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -26,12 +24,13 @@ public class UserRegistration extends TestAncestor{
 		driver.findElement(By.name("confirmed_password")).sendKeys(password);
 		driver.findElement(By.name("create_account")).click();
 		
-		driver.findElement(By.cssSelector("#box-account li:last-child")).click();
+		driver.findElement(By.cssSelector("#box-account li:last-child a")).click();
 		
 		driver.findElement(By.name("email")).sendKeys(email);
 		driver.findElement(By.name("password")).sendKeys(password);
+		driver.findElement(By.name("login")).click();
 		
-		System.out.println(email);
+		driver.findElement(By.cssSelector("#box-account li:last-child a")).click();
 	}
 
 }
