@@ -5,7 +5,7 @@
  */
 package Pages.litecartShop;
 
-import Pages.AbstractPage;
+import Pages.AbstractPageComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,7 +14,7 @@ import org.openqa.selenium.support.FindBy;
  *
  * @author nd
  */
-public class UserMenuWigget extends AbstractPage{
+public class UserMenuWigget extends AbstractPageComponent{
     @FindBy(css = "#box-account li:last-child a")
     private WebElement logout; 
     
@@ -25,9 +25,4 @@ public class UserMenuWigget extends AbstractPage{
         super(driver);
     }
 
-    @Override
-    public String getUrl() {
-        return "";
-    }
-    
 }

@@ -1,14 +1,11 @@
 package Pages;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
-public abstract class AbstractPage {
-	protected WebDriver driver;
+public abstract class AbstractPage extends AbstractPageComponent{
 	
 	public AbstractPage(WebDriver driver){
-            PageFactory.initElements(driver, this);
-            this.driver = driver;
+            super(driver);
 	}
 	
 	public abstract String getUrl();

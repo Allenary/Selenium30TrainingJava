@@ -14,7 +14,7 @@ import org.openqa.selenium.support.FindBy;
  *
  * @author nd
  */
-public class UserRegistrationPage  extends AbstractPage{
+public class UserRegistrationPage extends AbstractPage{
     @FindBy(name = "firstname")
     private WebElement firstName; 
     @FindBy(name = "lastname")

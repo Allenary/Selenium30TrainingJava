@@ -5,7 +5,7 @@
  */
 package Pages.litecartShop;
 
-import Pages.AbstractPage;
+import Pages.AbstractPageComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,7 +14,7 @@ import org.openqa.selenium.support.FindBy;
  *
  * @author nd
  */
-public class UserLoginWidget extends AbstractPage{
+public class UserLoginWidget extends AbstractPageComponent{
     @FindBy(name = "email")
     private WebElement email; 
     @FindBy(name = "password")
@@ -31,9 +31,4 @@ public class UserLoginWidget extends AbstractPage{
 	buttonLogin.click(); 
      }
 
-    @Override
-    public String getUrl() {
-        return "";
-    }
-    
 }
