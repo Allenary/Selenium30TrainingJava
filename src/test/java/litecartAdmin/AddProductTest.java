@@ -1,5 +1,9 @@
 package litecartAdmin;
 
+import Pages.litecartAdmin.AddNewProductGeneralTab;
+import Pages.litecartAdmin.AddNewProductInformationTab;
+import Pages.litecartAdmin.AddNewProductPage;
+import Pages.litecartAdmin.AddNewProductPricesTab;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,54 +17,50 @@ import org.openqa.selenium.support.ui.Select;
 import testHelper.DateHelper;
 import testHelper.TestAncestor;
 import Pages.litecartAdmin.AdminLoginPage;
+import Pages.litecartAdmin.CatalogPage;
+import org.junit.Assert;
+import testHelper.DataGenerator;
 
 public class AddProductTest extends TestAncestor {
 
 	@Test
-	public void test() {
-		/*TODO: verify in FF
-		 *  change names to unique
-		 *   add assertion
-		 *   use pageObject
-		 */
-		(new AdminLoginPage(driver)).login();
-        driver.get("http://litecart.resscode.org.ua/admin/?app=catalog&doc=catalog");
-        driver.findElement(By.cssSelector("a.button:nth-child(2)")).click();
-        //General tab
-        driver.findElement(By.cssSelector("[name=status][value='1']")).click();
-        driver.findElement(By.name("name[en]")).sendKeys("TestName");
-        driver.findElement(By.name("code")).sendKeys("TestCode");
-        WebElement quantity =driver.findElement(By.name("quantity")); 
-        quantity.clear();
-        quantity.sendKeys("3");
-        File file = new File("src/test/resources/test.jpg");
-        String absolutePath = file.getAbsolutePath();
-        System.out.println(absolutePath);
-        driver.findElement(By.name("new_images[]")).sendKeys(absolutePath);
+	public void addNewProductTest() {
+
+            String productName = "TestProduct"+DataGenerator.getUniqueString();
+            
+            new AdminLoginPage(driver).login();
+            CatalogPage catalogPage = new CatalogPage(driver);
+            driver.get(catalogPage.getUrl());
+            int countProductsBeforeTest = catalogPage.countProducts();
+            
+            catalogPage.navigateToAddProductPage();            
+            AddNewProductPage productPage = new AddNewProductPage(driver);
+            
+            //General tab
+            AddNewProductGeneralTab generalTab = new AddNewProductGeneralTab(driver);
+            generalTab.makeProductEnabled();
+            generalTab.setCode("testcode");
+            generalTab.setProductName(productName);
+            generalTab.SetQuantity("5");
+            
+            File file = new File("src/test/resources/test.jpg");
+            generalTab.updloadProductImage(file);
         
-        Date dateStart = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        driver.findElement(By.name("date_valid_from")).sendKeys(dateFormat.format(dateStart));
-        Date dateEnd = DateHelper.getTodayPlusOneYear();
-        driver.findElement(By.name("date_valid_to")).sendKeys(dateFormat.format(dateEnd));
+            generalTab.setDates(new Date(), DateHelper.getTodayPlusOneYear());
+
+            //Information tab
+            productPage.navigateToInformationTab();
+            new AddNewProductInformationTab(driver).populateData();
         
-        //Information tab
-        driver.findElement(By.cssSelector(".tabs li:nth-child(2)")).click();
-        new Select(driver.findElement(By.name("manufacturer_id"))).selectByIndex(1);
-        driver.findElement(By.name("keywords")).sendKeys("test keyword");
-        driver.findElement(By.name("short_description[en]")).sendKeys("test short desription");
-        
-        driver.findElement(By.className("trumbowyg-editor")).sendKeys("test full description");
-        driver.findElement(By.name("head_title[en]")).sendKeys("test title");
-        driver.findElement(By.name("meta_description[en]")).sendKeys("test meta");
-        
-        //Prices tab
-        //driver.findElement(By.linkText("Prices")).click();
-        driver.findElement(By.cssSelector(".tabs li:nth-child(4)")).click();
-        driver.findElement(By.name("purchase_price")).sendKeys("5");
-        new Select(driver.findElement(By.name("purchase_price_currency_code"))).selectByValue("USD");
-        
-       driver.findElement(By.name("save")).click();
+            //Prices tab
+            productPage.navigateToPricesTab();
+            AddNewProductPricesTab pricesTab = new AddNewProductPricesTab(driver);
+            pricesTab.addPurchasePrice("5", "USD");
+            pricesTab.addUsdPrices("5", "8");
+
+            productPage.saveData();
+            
+            Assert.assertEquals(countProductsBeforeTest+1, new CatalogPage(driver).countProducts());
 	}
 
 }

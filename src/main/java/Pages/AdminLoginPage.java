@@ -5,8 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class AdminLoginPage extends AbstractPage {
-	private String adminLogin = "admin";
-	private String adminPass = "admin123";
+	private final String adminLogin = "admin";
+	private final String adminPass = "admin123";
 	
 	public AdminLoginPage(WebDriver driver) {
 		super(driver);
