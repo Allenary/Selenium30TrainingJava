@@ -20,14 +20,15 @@ public class AddProductTest extends TestAncestor {
 	public void test() {
 		/*TODO: verify in FF
 		 *  change names to unique
-		 *   change selectors to most efficient than searching by text
+		 *   change selectors to more efficient than searching by text
 		 *   add assertion
 		 *   make product enabled
 		 *   use pageObject
 		 */
 		(new AdminLoginPage(driver)).login();
         driver.get("http://litecart.resscode.org.ua/admin/?app=catalog&doc=catalog");
-        driver.findElement(By.linkText("Add New Product")).click();
+        //driver.findElement(By.linkText("Add New Product")).click();
+        driver.findElement(By.cssSelector("a.button:nth-child(2)")).click();
         //General tab
         driver.findElement(By.name("name[en]")).sendKeys("TestName");
         driver.findElement(By.name("code")).sendKeys("TestCode");
@@ -46,7 +47,8 @@ public class AddProductTest extends TestAncestor {
         driver.findElement(By.name("date_valid_to")).sendKeys(dateFormat.format(dateEnd));
         
         //Information tab
-        driver.findElement(By.linkText("Information")).click();
+        //driver.findElement(By.linkText("Information")).click();
+        driver.findElement(By.cssSelector(".tabs li:nth-child(2)")).click();
         new Select(driver.findElement(By.name("manufacturer_id"))).selectByIndex(1);
         driver.findElement(By.name("keywords")).sendKeys("test keyword");
         driver.findElement(By.name("short_description[en]")).sendKeys("test short desription");
@@ -56,7 +58,8 @@ public class AddProductTest extends TestAncestor {
         driver.findElement(By.name("meta_description[en]")).sendKeys("test meta");
         
         //Prices tab
-        driver.findElement(By.linkText("Prices")).click();
+        //driver.findElement(By.linkText("Prices")).click();
+        driver.findElement(By.cssSelector(".tabs li:nth-child(4)")).click();
         driver.findElement(By.name("purchase_price")).sendKeys("5");
         new Select(driver.findElement(By.name("purchase_price_currency_code"))).selectByValue("USD");
         
