@@ -41,8 +41,14 @@ public class UserRegistrationPage  extends AbstractPage{
     public UserRegistrationPage(WebDriver driver) {
         super(driver);
     }
+     
+    public void createAccount(String email, String password){
+        driver.get(getUrl());
+        populateData(email, password);
+        buttonCreateAccount.click();
+    }
     
-    public void populateData(String email, String pass){
+    public void populateData(String email, String password){
         firstName.sendKeys("testfirstname");
         lastName.sendKeys("testLastName");
         address1.sendKeys("testAddress1");
@@ -51,13 +57,10 @@ public class UserRegistrationPage  extends AbstractPage{
         this.email.sendKeys(email);
 	phone.sendKeys("123456789");
 		 
-	password.sendKeys(pass);
-	confirmedPassword.sendKeys(pass);
+	this.password.sendKeys(password);
+	confirmedPassword.sendKeys(password);
     }
-    
-    public void createAccount(){
-        buttonCreateAccount.click();
-    }
+   
 
     @Override
     public String getUrl() {
