@@ -19,7 +19,7 @@ import org.openqa.selenium.WebElement;
 
 import testHelper.TestAncestor;
 import testHelper.WebElemsHelper;
-import Pages.AdminLoginPage;
+import Pages.litecartAdmin.AdminLoginPage;
 
 @RunWith(Parameterized.class)
 public class EditCountryPageTest extends TestAncestor {

@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 
 import testHelper.TestAncestor;
 import testHelper.WebElemsHelper;
-import Pages.AdminLoginPage;
+import Pages.litecartAdmin.AdminLoginPage;
 
 public class CountriesPageTest extends TestAncestor {
     

@@ -1,5 +1,6 @@
-package Pages;
+package Pages.litecartAdmin;
 
+import Pages.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

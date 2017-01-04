@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import testHelper.DateHelper;
 import testHelper.TestAncestor;
-import Pages.AdminLoginPage;
+import Pages.litecartAdmin.AdminLoginPage;
 
 public class AddProductTest extends TestAncestor {
 
@@ -21,7 +21,6 @@ public class AddProductTest extends TestAncestor {
 		/*TODO: verify in FF
 		 *  change names to unique
 		 *   add assertion
-		 *   make product enabled
 		 *   use pageObject
 		 */
 		(new AdminLoginPage(driver)).login();
