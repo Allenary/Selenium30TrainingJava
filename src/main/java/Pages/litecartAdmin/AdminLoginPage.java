@@ -14,7 +14,7 @@ public class AdminLoginPage extends AbstractPage {
 	
 	public void login(){
 		driver.get(getUrl());
-		driver.findElement(By.name("username")).sendKeys(adminLogin);
+                driver.findElement(By.name("username")).sendKeys(adminLogin);
 		driver.findElement(By.name("password")).sendKeys(adminPass);
 		driver.findElement(By.name("login")).click();
 	}
