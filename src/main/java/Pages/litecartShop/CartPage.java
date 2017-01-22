@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import testHelper.TestConstants;
 
 /**
  *
@@ -21,9 +22,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CartPage extends AbstractPage{
     @FindBy(css = "td.item")
     List<WebElement> products;
-    @FindBy(id = "order_confirmation-wrapper")
-    WebElement table;
-    
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -37,9 +35,10 @@ public class CartPage extends AbstractPage{
         return products.size();
     }
     
-    public void waitForTableUpdate(){
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.stalenessOf(table));
+    public void waitForCountProductsToBe(int count){
+        WebDriverWait wait = new WebDriverWait(driver, TestConstants.EXPLICIT_WAIT_SECONDS);
+        //wait.until(ExpectedConditions.refreshed(ExpectedConditions.stalenessOf(table)));
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("td.item"), count));
     }
     @Override
     public String getUrl() {
