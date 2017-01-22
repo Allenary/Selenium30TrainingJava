@@ -11,6 +11,6 @@ package testHelper;
  */
 public class TestConstants {
     public static final int EXPLICIT_WAIT_SECONDS = 5;
-    public static final int IMPLICIT__WAIT_SECONDS = 5;
+    public static final int IMPLICIT__WAIT_SECONDS = 2;
     
 }
