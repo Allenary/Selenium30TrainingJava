@@ -27,7 +27,8 @@ public class CartWidget extends AbstractPageComponent{
     public int countProducts(){
         return Integer.parseInt(countProducts.getText());
     }
-    public void openCart(){
+    public CartPage openCart(){
         checkout.click();
+        return new CartPage(driver);
     }
 }

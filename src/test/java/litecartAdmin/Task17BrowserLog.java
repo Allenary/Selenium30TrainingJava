@@ -15,6 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.logging.LogType;
 import testHelper.TestAncestor;
+import static testHelper.WebElemsHelper.getListOfUrls;
 
 /**
  *
@@ -25,13 +26,12 @@ public class Task17BrowserLog extends TestAncestor{
      @Test
      public void checkBrowserLogOnEditProductPage() {
         new AdminLoginPage(driver).login();
+        
         driver.get("http://litecart.resscode.org.ua/admin/?app=catalog&doc=catalog&category_id=1");
         List<WebElement> products = driver.findElements(By.cssSelector("td:nth-child(3)>a[href*=product_id]"));
-        List<String> urls = new ArrayList<>();
-        products.forEach((c)->urls.add(c.getAttribute("href")));
+        List<String> urls = getListOfUrls(products);
         for(String url:urls){
             driver.get(url);
-            driver.manage().logs().get(LogType.BROWSER).getAll().forEach(l->System.out.println(l));
             assertEquals("no message in log",0,driver.manage().logs().get(LogType.BROWSER).getAll().size());
         }
     }

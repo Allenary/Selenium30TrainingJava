@@ -9,12 +9,12 @@ import Pages.litecartAdmin.AdminLoginPage;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testHelper.TestAncestor;
+import testHelper.TestConstants;
 
 /**
  *
@@ -23,7 +23,7 @@ import testHelper.TestAncestor;
 public class Task14ExternalLinks  extends TestAncestor{
     
      @Test
-     public void hello() {
+     public void OpenLinksTest() {
          new AdminLoginPage(driver).login();
          driver.get("http://litecart.resscode.org.ua/admin/?app=countries&doc=edit_country&country_code=AF");
          List<WebElement> links = driver.findElements(By.className("fa-external-link"));
@@ -31,7 +31,7 @@ public class Task14ExternalLinks  extends TestAncestor{
          Set<String> allOpenedWindows = driver.getWindowHandles();
          for(WebElement link: links){
              link.click();
-             WebDriverWait wait = new WebDriverWait(driver, 5);
+             WebDriverWait wait = new WebDriverWait(driver, TestConstants.EXPLICIT_WAIT_SECONDS);
              wait.until(ExpectedConditions.numberOfWindowsToBe(allOpenedWindows.size()+1));
              Set<String> allWindows = driver.getWindowHandles();
              allWindows.removeAll(allOpenedWindows);

@@ -11,6 +11,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import static testHelper.WebElemsHelper.getListOfUrls;
 
 /**
  *
@@ -26,9 +27,7 @@ public class MainPage extends AbstractPage{
     }
 
     public List<String> PopularProductsUrls(){
-        List<String> urls = new ArrayList();
-        popularProducts.forEach(p->urls.add(p.getAttribute("href")));
-        return urls;
+        return getListOfUrls(popularProducts);
     }
     
     @Override

@@ -5,6 +5,7 @@
  */
 package litecartShop;
 
+import Pages.litecartShop.CartPage;
 import Pages.litecartShop.CartWidget;
 import Pages.litecartShop.MainPage;
 import Pages.litecartShop.ViewProductPage;
@@ -16,6 +17,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testHelper.TestAncestor;
+import testHelper.TestConstants;
 
 /**
  *
@@ -24,7 +26,7 @@ import testHelper.TestAncestor;
 public class CartTest extends TestAncestor{
     
     @Test
-    public void hello() {
+    public void CartComplexTest() {
         List<String> productUrls =new MainPage(driver).PopularProductsUrls();
         int countProducts = new CartWidget(driver).countProducts();
         //add products
@@ -33,16 +35,17 @@ public class CartTest extends TestAncestor{
             WebElement e = driver.findElement(By.className("quantity"));
             productPage.addToCart();
             countProducts++;
-            WebDriverWait wait = new WebDriverWait(driver, 5);
+            WebDriverWait wait = new WebDriverWait(driver, TestConstants.EXPLICIT_WAIT_SECONDS);
             wait.until(ExpectedConditions.textToBe(By.className("quantity"), String.valueOf(countProducts)));
-            //assertEquals(countProducts, new CartWidget(driver).countProducts());
         }
-        new CartWidget(driver).openCart();
-        for (int i=0; i<3; i++){
+        CartPage cartPage = new CartWidget(driver).openCart();
+        //remove products
+        for (int i=3; i>0; i--){
             WebElement table = driver.findElement(By.id("order_confirmation-wrapper"));
-            driver.findElement(By.name("remove_cart_item")).click();
-            WebDriverWait wait = new WebDriverWait(driver, 5);
+            cartPage.removeProduct();
+            WebDriverWait wait = new WebDriverWait(driver, TestConstants.EXPLICIT_WAIT_SECONDS);
             wait.until(ExpectedConditions.stalenessOf(table));
+            assertEquals(i-1,cartPage.countProducts());
         }
     }
 }
