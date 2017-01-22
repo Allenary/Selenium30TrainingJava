@@ -28,17 +28,15 @@ public class CartTest extends TestAncestor{
     @Test
     public void CartComplexTest() {
         List<String> productUrls =new MainPage(driver).PopularProductsUrls();
-        int countProducts = new CartWidget(driver).countProducts();
+        CartWidget cartWidget = new CartWidget(driver);
         //add products
-        for (int i=0; i<3; i++){
+        for (int i=0; i<3; i++){           
+            int countProducts = cartWidget.countProducts();
             ViewProductPage productPage = new ViewProductPage(driver, productUrls.get(i));
-            WebElement e = driver.findElement(By.className("quantity"));
-            productPage.addToCart();
-            countProducts++;
-            WebDriverWait wait = new WebDriverWait(driver, TestConstants.EXPLICIT_WAIT_SECONDS);
-            wait.until(ExpectedConditions.textToBe(By.className("quantity"), String.valueOf(countProducts)));
+            productPage.addToCart();          
+            cartWidget.waitForCountUpdateTo(countProducts+1);
         }
-        CartPage cartPage = new CartWidget(driver).openCart();
+        CartPage cartPage = cartWidget.openCart();//new CartWidget(driver).openCart();
         //remove products
         for (int i=3; i>0; i--){
             WebElement table = driver.findElement(By.id("order_confirmation-wrapper"));

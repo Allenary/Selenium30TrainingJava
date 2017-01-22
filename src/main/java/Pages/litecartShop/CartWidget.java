@@ -6,9 +6,13 @@
 package Pages.litecartShop;
 
 import Pages.AbstractPageComponent;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import testHelper.TestConstants;
 
 /**
  *
@@ -20,8 +24,11 @@ public class CartWidget extends AbstractPageComponent{
     @FindBy(css = "#cart a.link")
     private WebElement checkout;
     
+    private final WebDriverWait wait;
+    
     public CartWidget(WebDriver driver) {
         super(driver);
+        wait = new WebDriverWait(driver, TestConstants.EXPLICIT_WAIT_SECONDS);
     }
     
     public int countProducts(){
@@ -30,5 +37,8 @@ public class CartWidget extends AbstractPageComponent{
     public CartPage openCart(){
         checkout.click();
         return new CartPage(driver);
+    }
+    public void waitForCountUpdateTo(int value){
+        wait.until(ExpectedConditions.textToBePresentInElement(countProducts, String.valueOf(value)));
     }
 }

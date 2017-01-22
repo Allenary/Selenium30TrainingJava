@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.Select;
  * @author nd
  */
 public class ViewProductPage  extends AbstractPage{
+    public CartWidget cartWidget;
     @FindBy(name ="add_cart_product")
     private WebElement butonAddToCart;
     @FindBy(name="options[Size]")
@@ -28,6 +29,7 @@ public class ViewProductPage  extends AbstractPage{
         super(driver);  
         this.url = url;
         driver.get(url);
+        cartWidget = new CartWidget(driver);
     }
     
     public boolean selectSizeIfPresent(int index){
